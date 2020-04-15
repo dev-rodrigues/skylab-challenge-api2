@@ -12,8 +12,9 @@ transactionRouter.get('/', (req, res) => {
     const calculateExpenseService = new CalculateExpenseService(
       transactionsRepository,
     );
+    const { balance, transactions } = calculateExpenseService.execute();
 
-    return res.json({});
+    return res.json({ balance, transactions });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
