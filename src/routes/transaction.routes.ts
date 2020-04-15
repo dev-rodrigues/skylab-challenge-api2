@@ -2,17 +2,22 @@ import { Router } from 'express';
 
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import CreateTransactionService from '../services/CreateTransactionService';
+import CalculateExpenseService from '../services/CalculateExpenseService';
 
 const transactionRouter = Router();
 const transactionsRepository = new TransactionsRepository();
 
-// transactionRouter.get('/', (req, res) => {
-//   try {
-//     // TODO
-//   } catch (err) {
-//     return res.status(400).json({ error: err.message });
-//   }
-// });
+transactionRouter.get('/', (req, res) => {
+  try {
+    const calculateExpenseService = new CalculateExpenseService(
+      transactionsRepository,
+    );
+
+    return res.json({});
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+});
 
 transactionRouter.post('/', (req, res) => {
   try {
